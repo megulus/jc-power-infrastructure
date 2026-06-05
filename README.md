@@ -35,6 +35,53 @@ covers the other side of the river.
 This repository is a small attempt to close that gap — starting in one
 neighborhood, with the intent to expand.
 
+## How this differs from existing data
+
+A reasonable first question is whether this already exists. For this utility and
+service territory, it does not. The datasets that come closest are either
+coarser, cover a different region, or describe a different layer of the grid:
+
+- **Modeled estimates at ZIP/utility granularity.** The most comprehensive open
+  effort is Stanford's *Grid Underground Distribution Statistics* (GUDS, Sun et
+  al., 2024), which assembles each utility's total underground and overhead
+  *mileage* from regulatory filings and allocates those totals down to ZIP Code
+  Tabulation Areas in proportion to population. The underground "rate" for any
+  given ZIP is therefore an estimate derived from a utility-wide ratio — not an
+  observation that a specific street is overhead or buried. It cannot
+  distinguish one block from the next.
+- **Machine-learning classification, in a different region.** The closest
+  methodological neighbor is a Stanford framework (Wang et al., *Nature
+  Communications*, 2023) that uses machine learning to classify overhead
+  distribution from Google Street View imagery and predict underground extent
+  from road-network and building data. It was developed and benchmarked in
+  California against utility-owned grid maps. This dataset shares its data source
+  (Street View) and target (overhead/underground classification) but covers a
+  different region and utility — PSE&G's New Jersey territory — by direct human
+  observation rather than model inference, in an area where no utility-owned
+  benchmark map is publicly available. See [`references.md`](references.md) for
+  detail.
+- **Transmission, not distribution.** Datasets derived from HIFLD (the Homeland
+  Infrastructure Foundation-Level Data electric transmission layer) map
+  high-voltage bulk transmission lines between substations — a different layer
+  of the grid from the distribution lines on the poles outside homes and
+  businesses, which is what this dataset classifies.
+- **OpenStreetMap.** OSM models distribution lines in its schema, but its own
+  documentation notes that underground cables should only be mapped where
+  technical knowledge and sources are available — because they are invisible to
+  the aerial imagery most contributors work from. A direct query of OSM for the
+  Phase I corridor (June 2026) returned no distribution lines, poles, or
+  overhead/underground classification, confirming the gap for the area covered
+  so far; the check is corridor-specific and is re-run as coverage expands. The
+  query and its date are documented in [`METHODOLOGY.md`](METHODOLOGY.md).
+
+In short: the existing data is either a modeled estimate at ZIP resolution
+(GUDS), a machine-learning classification of a different region (Wang et al.,
+California), or a different grid layer entirely (HIFLD). What this dataset
+contributes is a direct, street-level classification of PSE&G's distribution
+infrastructure in Jersey City — a specific utility and service territory, in a
+dense Northeastern coastal-storm context, that the existing efforts do not
+cover.
+
 ## What's in the dataset
 
 The dataset is organized around three feature types: line segments
@@ -49,6 +96,11 @@ Classification is performed by direct observation of Google Street View
 imagery, with each block-face inspected and coded by hand. The initial
 release covers a bounded area of downtown Jersey City, with later phases
 extending coverage westward.
+
+The full classification method — what is observed versus inferred, the
+decision rule, known sources of error, and the validation procedure — is
+documented in [`METHODOLOGY.md`](METHODOLOGY.md), and field definitions are in
+[`DATA_DICTIONARY.md`](DATA_DICTIONARY.md).
 
 ## Background research
 
@@ -131,6 +183,10 @@ required (see License below). I'd also be interested to hear how you used it.
 
 - **Single-observer classification.** Every segment in the current release was
   coded by one person. Inter-rater reliability has not been measured.
+- **Imagery-based inference, not direct mapping.** Underground segments are
+  inferred from the absence of visible overhead infrastructure, not observed
+  directly. See [`METHODOLOGY.md`](METHODOLOGY.md) for the known error modes
+  (rear-lot feeds, hybrid blocks, stale imagery).
 - **Snapshot in time.** Google Street View imagery for the Phase I area varies
   in capture date. Infrastructure changes — new construction, undergrounding
   projects, pole replacements — are not reflected in real time.
@@ -149,8 +205,8 @@ required (see License below). I'd also be interested to hear how you used it.
   [Creative Commons Attribution 4.0 International License (CC-BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 
 Attribution suggestion:
-> Jersey City Power Infrastructure Dataset, [author], [year]. Available at
-> [repository URL]. Licensed CC-BY 4.0.
+> Jersey City Power Infrastructure Dataset, Meg Dahlgren, 2026. Available at
+> https://github.com/megulus/jc-power-infrastructure. Licensed CC-BY 4.0.
 
 ## Contact and contributions
 
