@@ -37,9 +37,9 @@ neighborhood, with the intent to expand.
 
 ## How this differs from existing data
 
-A reasonable first question is whether this already exists. It does not, at
-this granularity. The datasets that come closest are either coarser or describe
-a different layer of the grid:
+A reasonable first question is whether this already exists. For this utility and
+service territory, it does not. The datasets that come closest are either
+coarser, cover a different region, or describe a different layer of the grid:
 
 - **Modeled estimates at ZIP/utility granularity.** The most comprehensive open
   effort is Stanford's *Grid Underground Distribution Statistics* (GUDS, Sun et
@@ -49,6 +49,17 @@ a different layer of the grid:
   given ZIP is therefore an estimate derived from a utility-wide ratio — not an
   observation that a specific street is overhead or buried. It cannot
   distinguish one block from the next.
+- **Machine-learning classification, in a different region.** The closest
+  methodological neighbor is a Stanford framework (Wang et al., *Nature
+  Communications*, 2023) that uses machine learning to classify overhead
+  distribution from Google Street View imagery and predict underground extent
+  from road-network and building data. It was developed and benchmarked in
+  California against utility-owned grid maps. This dataset shares its data source
+  (Street View) and target (overhead/underground classification) but covers a
+  different region and utility — PSE&G's New Jersey territory — by direct human
+  observation rather than model inference, in an area where no utility-owned
+  benchmark map is publicly available. See [`references.md`](references.md) for
+  detail.
 - **Transmission, not distribution.** Datasets derived from HIFLD (the Homeland
   Infrastructure Foundation-Level Data electric transmission layer) map
   high-voltage bulk transmission lines between substations — a different layer
@@ -59,13 +70,17 @@ a different layer of the grid:
   technical knowledge and sources are available — because they are invisible to
   the aerial imagery most contributors work from. A direct query of OSM for the
   Phase I corridor (June 2026) returned no distribution lines, poles, or
-  overhead/underground classification, confirming the gap; the query and its
-  date are documented in [`METHODOLOGY.md`](METHODOLOGY.md).
+  overhead/underground classification, confirming the gap for the area covered
+  so far; the check is corridor-specific and is re-run as coverage expands. The
+  query and its date are documented in [`METHODOLOGY.md`](METHODOLOGY.md).
 
-In short: where comparable data exists, it is either a population-weighted
-estimate at ZIP resolution (GUDS) or a different grid layer entirely (HIFLD).
-This dataset is a direct, street-level classification at block-face resolution,
-which is new for this area.
+In short: the existing data is either a modeled estimate at ZIP resolution
+(GUDS), a machine-learning classification of a different region (Wang et al.,
+California), or a different grid layer entirely (HIFLD). What this dataset
+contributes is a direct, street-level classification of PSE&G's distribution
+infrastructure in Jersey City — a specific utility and service territory, in a
+dense Northeastern coastal-storm context, that the existing efforts do not
+cover.
 
 ## What's in the dataset
 
