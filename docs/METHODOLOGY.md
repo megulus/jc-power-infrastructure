@@ -114,14 +114,21 @@ The bounding box approximates the Phase I corridor (Marin Boulevard west,
 Columbus Drive north, the Hudson River east, the Hudson-Bergen Light Rail
 tracks south); adjust the four coordinates to re-run against a different extent.
 
+This finding applies only to the Phase I corridor. The check is re-run, with the
+bounding box updated, whenever coverage is extended to a new area, and the date
+and result for each phase are recorded here as the dataset grows.
+
 ## Workflow summary
 
-Data is collected into four CSV files (intersections, segments, poles,
-underground features), edited in VS Code with the Rainbow CSV extension, with
-coordinates captured via Google Maps right-click. A Python script converts the
-CSVs to GeoJSON. A calibration block and a pipeline smoke-test are run before
-the bulk classification pass, to lock the decision rule and confirm the
-conversion pipeline before scaling.
+Data is collected into three CSV files (intersections, segments, underground
+features), edited in VS Code with the Rainbow CSV extension, with coordinates
+captured via Google Maps right-click. Pole information is rolled up onto the
+segment (counts and conductor properties) rather than stored per pole, since
+individual poles cannot be reliably geolocated from imagery; see
+[`DATA_DICTIONARY.md`](DATA_DICTIONARY.md) for the schema and the reasoning. A
+Python script converts the CSVs to GeoJSON. A calibration block and a pipeline
+smoke-test are run before the bulk classification pass, to lock the decision rule
+and confirm the conversion pipeline before scaling.
 
-Field definitions for all four files are in
+Field definitions for all three files are in
 [`DATA_DICTIONARY.md`](DATA_DICTIONARY.md).
