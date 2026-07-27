@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5d1bfaa2060479346fdf5a8ced543181 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; bottom: 24px; left: 24px; z-index: 9999;
+                background: white; padding: 10px 14px; border: 1px solid #999;
+                border-radius: 4px; font: 13px sans-serif; line-height: 1.6;">
+      <b>Distribution</b><br>
+      <span style="color:#d62728;">&#9644;</span> Overhead<br>
+      <span style="color:#1f77b4;">&#9644;</span> Underground<br>
+      <span style="color:#9467bd;">&#9644;</span> Mixed<br>
+      <span style="color:#7f7f7f;">&#9644;</span> Unknown
+    </div>
+    
+    
+            <div class="folium-map" id="map_5d1bfaa2060479346fdf5a8ced543181" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5d1bfaa2060479346fdf5a8ced543181 = L.map(
+                "map_5d1bfaa2060479346fdf5a8ced543181",
+                {
+                    center: [40.71604294034283, -74.03759283761737],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 16,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_c0324ea618531606d79991f272b34828 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_c0324ea618531606d79991f272b34828.addTo(map_5d1bfaa2060479346fdf5a8ced543181);
+        
+    
+            var poly_line_6387dc120d74758cd30668fe102f63b0 = L.polyline(
+                [[40.71659235106308, -74.04249445966782], [40.71640735316395, -74.04086636215452]],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d62728", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_5d1bfaa2060479346fdf5a8ced543181);
+        
+    
+        var popup_c5b6410a0b542b4816ed79e0587be10a = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_f5d2ad0323e355d5e03d2fd895a110ba = $(`<div id="html_f5d2ad0323e355d5e03d2fd895a110ba" style="width: 100.0%; height: 100.0%;"><b>york__marin_to_van_vorst</b><br>class: overhead<br>primary side: north<br>poles: 7 &nbsp; transformers: 3</div>`)[0];
+                popup_c5b6410a0b542b4816ed79e0587be10a.setContent(html_f5d2ad0323e355d5e03d2fd895a110ba);
+            
+        
+
+        poly_line_6387dc120d74758cd30668fe102f63b0.bindPopup(popup_c5b6410a0b542b4816ed79e0587be10a)
+        ;
+
+        
+    
+    
+            poly_line_6387dc120d74758cd30668fe102f63b0.bindTooltip(
+                `<div>
+                     york__marin_to_van_vorst
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_83acc06fe77968d7afcc51c62a26eba1 = L.polyline(
+                [[40.71640735316395, -74.04086636215452], [40.71623455031622, -74.03921009798589]],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d62728", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_5d1bfaa2060479346fdf5a8ced543181);
+        
+    
+        var popup_cb0fee9c95a3be06d72e697ae379c566 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_9137f8ce3a4fddd16191994c1b8c7d60 = $(`<div id="html_9137f8ce3a4fddd16191994c1b8c7d60" style="width: 100.0%; height: 100.0%;"><b>york__van_vorst_to_warren</b><br>class: overhead<br>primary side: north<br>poles: 11 &nbsp; transformers: 4</div>`)[0];
+                popup_cb0fee9c95a3be06d72e697ae379c566.setContent(html_9137f8ce3a4fddd16191994c1b8c7d60);
+            
+        
+
+        poly_line_83acc06fe77968d7afcc51c62a26eba1.bindPopup(popup_cb0fee9c95a3be06d72e697ae379c566)
+        ;
+
+        
+    
+    
+            poly_line_83acc06fe77968d7afcc51c62a26eba1.bindTooltip(
+                `<div>
+                     york__van_vorst_to_warren
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_1f31884b2d4340be62669a42c7f805ee = L.polyline(
+                [[40.71623455031622, -74.03921009798589], [40.71603836717379, -74.03754846913687]],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d62728", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_5d1bfaa2060479346fdf5a8ced543181);
+        
+    
+        var popup_b43ba579a66818c0ecbd2f0c1e6ce453 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_1b099b18e282ffebd364059839ba0c9f = $(`<div id="html_1b099b18e282ffebd364059839ba0c9f" style="width: 100.0%; height: 100.0%;"><b>york__warren_to_washington</b><br>class: overhead<br>primary side: north<br>poles: 7 &nbsp; transformers: 3</div>`)[0];
+                popup_b43ba579a66818c0ecbd2f0c1e6ce453.setContent(html_1b099b18e282ffebd364059839ba0c9f);
+            
+        
+
+        poly_line_1f31884b2d4340be62669a42c7f805ee.bindPopup(popup_b43ba579a66818c0ecbd2f0c1e6ce453)
+        ;
+
+        
+    
+    
+            poly_line_1f31884b2d4340be62669a42c7f805ee.bindTooltip(
+                `<div>
+                     york__warren_to_washington
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_6a0148f2b219f8cfdb87bae54da59416 = L.polyline(
+                [[40.71603836717379, -74.03754846913687], [40.715844216429694, -74.03582783266037]],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d62728", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_5d1bfaa2060479346fdf5a8ced543181);
+        
+    
+        var popup_88c8b0d3700c409705136caafcf2a445 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_f5678251cd7d5db2b434140ccb5292cb = $(`<div id="html_f5678251cd7d5db2b434140ccb5292cb" style="width: 100.0%; height: 100.0%;"><b>york__washington_to_greene</b><br>class: overhead<br>primary side: north<br>poles: 12 &nbsp; transformers: 10</div>`)[0];
+                popup_88c8b0d3700c409705136caafcf2a445.setContent(html_f5678251cd7d5db2b434140ccb5292cb);
+            
+        
+
+        poly_line_6a0148f2b219f8cfdb87bae54da59416.bindPopup(popup_88c8b0d3700c409705136caafcf2a445)
+        ;
+
+        
+    
+    
+            poly_line_6a0148f2b219f8cfdb87bae54da59416.bindTooltip(
+                `<div>
+                     york__washington_to_greene
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_5c212b0dd93b31924c58c9e8fc2b52d4 = L.polyline(
+                [[40.715844216429694, -74.03582783266037], [40.71566937898973, -74.03431640826008]],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#1f77b4", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_5d1bfaa2060479346fdf5a8ced543181);
+        
+    
+        var popup_870c7525395d980b316525a3f8f121b8 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_8d0e2d6a470ddb13f9bb1f9567ede45b = $(`<div id="html_8d0e2d6a470ddb13f9bb1f9567ede45b" style="width: 100.0%; height: 100.0%;"><b>york__greene_to_hudson</b><br>class: underground<br>primary side: none<br>poles: 0 &nbsp; transformers: 0</div>`)[0];
+                popup_870c7525395d980b316525a3f8f121b8.setContent(html_8d0e2d6a470ddb13f9bb1f9567ede45b);
+            
+        
+
+        poly_line_5c212b0dd93b31924c58c9e8fc2b52d4.bindPopup(popup_870c7525395d980b316525a3f8f121b8)
+        ;
+
+        
+    
+    
+            poly_line_5c212b0dd93b31924c58c9e8fc2b52d4.bindTooltip(
+                `<div>
+                     york__greene_to_hudson
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_29dfcf12cee311320072a367558d726d = L.polyline(
+                [[40.71566937898973, -74.03431640826008], [40.715535200904185, -74.03308125134491]],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#1f77b4", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_5d1bfaa2060479346fdf5a8ced543181);
+        
+    
+        var popup_ec6a60f22deccd13983407d7dd291a70 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_4241078f7af8f39a74fb2abc685be468 = $(`<div id="html_4241078f7af8f39a74fb2abc685be468" style="width: 100.0%; height: 100.0%;"><b>york_hudson_to_terminus_east</b><br>class: underground<br>primary side: none<br>poles: 0 &nbsp; transformers: 0</div>`)[0];
+                popup_ec6a60f22deccd13983407d7dd291a70.setContent(html_4241078f7af8f39a74fb2abc685be468);
+            
+        
+
+        poly_line_29dfcf12cee311320072a367558d726d.bindPopup(popup_ec6a60f22deccd13983407d7dd291a70)
+        ;
+
+        
+    
+    
+            poly_line_29dfcf12cee311320072a367558d726d.bindTooltip(
+                `<div>
+                     york_hudson_to_terminus_east
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
