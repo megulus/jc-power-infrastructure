@@ -1,0 +1,7 @@
+segment_id,from_intersection,to_intersection,overhead_underground,primary_side,primary_conductors,pole_count,transformer_count,secondary_present,joint_use,streetlight_count,imagery_date,notes
+york__marin_to_van_vorst,marin_x_york,van_vorst_x_york,overhead,north,3,7,3,true,true,5,2025-10,
+york__van_vorst_to_warren,van_vorst_x_york,warren_x_york,overhead,north,3,11,4,true,true,4,2025-10,pole at intersection with Van Vorst carries lines in 2 directions
+york__warren_to_washington,warren_x_york,washington_x_york,overhead,north,3,7,3,true,true,5,2025-10,5G and another communications-only pole secondary_present
+york__washington_to_greene,washington_x_york,greene_x_york,overhead,north,3,12,10,true,true,5,2025-10,pole at Greene and York appears to have a riser
+york__greene_to_hudson,greene_x_york,hudson_x_york,underground,none,0,0,0,false,false,0,2025-10
+york_hudson_to_terminus_east,hudson_x_york,york_terminus_east,underground,none,0,0,0,false,false,0,2022-07

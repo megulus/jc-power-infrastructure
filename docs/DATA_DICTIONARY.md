@@ -65,6 +65,24 @@ information is rolled up onto this row.
 | `imagery_date` | string | `YYYY-MM` | Capture date of the Street View imagery used, as displayed in Street View. Records evidence vintage. |
 | `notes` | string | free text | Ambiguities the fields cannot capture: mid-block side switches, service/crossing poles, comms-only poles, diagonal-street side naming, hybrid configurations. |
 
+### Reading the tally fields on underground segments
+
+The overhead-tally fields — `primary_conductors`, `pole_count`,
+`transformer_count`, `secondary_present`, `joint_use`, and `streetlight_count` —
+record **visible overhead infrastructure**. On an `underground` segment they are
+therefore `0`/`false`, because nothing overhead is present to count. This does
+*not* mean the segment has no primary, transformers, or secondary — that
+equipment exists below grade — only that it is not visible from the street and
+is out of scope for a street-observation dataset.
+
+As a result, `0`/`false` means something different depending on
+`overhead_underground`: on an `overhead` segment it is an observation of absence
+(looked, found none); on an `underground` segment it is structural (nothing
+overhead to observe). **The tally fields must always be read conditional on
+`overhead_underground`.** Aggregations (e.g. summing `transformer_count` across
+the corridor) count *visible overhead* equipment only, not the total installed
+grid.
+
 ## Underground feature points (`underground_features`)
 
 Discrete, locatable surface evidence of underground infrastructure. Unlike

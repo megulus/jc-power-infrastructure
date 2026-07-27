@@ -1,0 +1,191 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.04249445966782,
+            40.71659235106308
+          ],
+          [
+            -74.04086636215452,
+            40.71640735316395
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "york__marin_to_van_vorst",
+        "from_intersection": "marin_x_york",
+        "to_intersection": "van_vorst_x_york",
+        "overhead_underground": "overhead",
+        "primary_side": "north",
+        "primary_conductors": 3,
+        "pole_count": 7,
+        "transformer_count": 3,
+        "secondary_present": true,
+        "joint_use": true,
+        "streetlight_count": 5,
+        "imagery_date": "2025-10",
+        "notes": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.04086636215452,
+            40.71640735316395
+          ],
+          [
+            -74.03921009798589,
+            40.71623455031622
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "york__van_vorst_to_warren",
+        "from_intersection": "van_vorst_x_york",
+        "to_intersection": "warren_x_york",
+        "overhead_underground": "overhead",
+        "primary_side": "north",
+        "primary_conductors": 3,
+        "pole_count": 11,
+        "transformer_count": 4,
+        "secondary_present": true,
+        "joint_use": true,
+        "streetlight_count": 4,
+        "imagery_date": "2025-10",
+        "notes": "pole at intersection with Van Vorst carries lines in 2 directions"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.03921009798589,
+            40.71623455031622
+          ],
+          [
+            -74.03754846913687,
+            40.71603836717379
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "york__warren_to_washington",
+        "from_intersection": "warren_x_york",
+        "to_intersection": "washington_x_york",
+        "overhead_underground": "overhead",
+        "primary_side": "north",
+        "primary_conductors": 3,
+        "pole_count": 7,
+        "transformer_count": 3,
+        "secondary_present": true,
+        "joint_use": true,
+        "streetlight_count": 5,
+        "imagery_date": "2025-10",
+        "notes": "5G and another communications-only pole secondary_present"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.03754846913687,
+            40.71603836717379
+          ],
+          [
+            -74.03582783266037,
+            40.715844216429694
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "york__washington_to_greene",
+        "from_intersection": "washington_x_york",
+        "to_intersection": "greene_x_york",
+        "overhead_underground": "overhead",
+        "primary_side": "north",
+        "primary_conductors": 3,
+        "pole_count": 12,
+        "transformer_count": 10,
+        "secondary_present": true,
+        "joint_use": true,
+        "streetlight_count": 5,
+        "imagery_date": "2025-10",
+        "notes": "pole at Greene and York appears to have a riser"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.03582783266037,
+            40.715844216429694
+          ],
+          [
+            -74.03431640826008,
+            40.71566937898973
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "york__greene_to_hudson",
+        "from_intersection": "greene_x_york",
+        "to_intersection": "hudson_x_york",
+        "overhead_underground": "underground",
+        "primary_side": "none",
+        "primary_conductors": 0,
+        "pole_count": 0,
+        "transformer_count": 0,
+        "secondary_present": false,
+        "joint_use": false,
+        "streetlight_count": 0,
+        "imagery_date": "2025-10",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.03431640826008,
+            40.71566937898973
+          ],
+          [
+            -74.03308125134491,
+            40.715535200904185
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "york_hudson_to_terminus_east",
+        "from_intersection": "hudson_x_york",
+        "to_intersection": "york_terminus_east",
+        "overhead_underground": "underground",
+        "primary_side": "none",
+        "primary_conductors": 0,
+        "pole_count": 0,
+        "transformer_count": 0,
+        "secondary_present": false,
+        "joint_use": false,
+        "streetlight_count": 0,
+        "imagery_date": "2022-07",
+        "notes": null
+      }
+    }
+  ]
+}
