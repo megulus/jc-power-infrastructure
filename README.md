@@ -210,8 +210,8 @@ required (see License below). I'd also be interested to hear how you used it.
   [Creative Commons Attribution 4.0 International License (CC-BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 
 Attribution suggestion:
-> Jersey City Power Infrastructure Dataset, [author], [year]. Available at
-> [repository URL]. Licensed CC-BY 4.0.
+> Jersey City Power Infrastructure Dataset, Meg Dahlgren, 2026. Available at
+> https://github.com/megulus/jc-power-infrastructure. Licensed CC-BY 4.0.
 
 ## Contact and contributions
 
