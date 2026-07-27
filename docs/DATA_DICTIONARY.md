@@ -1,77 +1,89 @@
 # Data Dictionary
 
 Field definitions for the `jc-power-infrastructure` dataset. The dataset is
-published as GeoJSON, generated from four source CSV files (intersections,
-segments, poles, underground features) by a Python conversion script.
+published as GeoJSON, generated from three source CSV files (intersections,
+segments, underground features) by a Python conversion script.
 
-Geometry is **symbolic, not surveyed**: line segments follow block-face
-centerlines and point coordinates are captured via Google Maps right-click, so
-all coordinates are approximate. See [`METHODOLOGY.md`](METHODOLOGY.md) for how
-the classification fields are determined.
+Geometry is **symbolic, not surveyed**: line segments follow street centerlines
+between intersections, and point coordinates are captured via Google Maps
+right-click, so all coordinates are approximate. See
+[`METHODOLOGY.md`](METHODOLOGY.md) for how the classification fields are
+determined.
 
-## Segment identifiers
+## Why pole attributes live on the segment
 
-Segment and endpoint IDs follow a fixed naming convention:
+An earlier design modeled each utility pole as its own point feature. That was
+dropped: individual poles cannot be reliably geolocated from available imagery —
+matching a pole seen in Street View to a satellite pixel is unreliable, worsened
+by tree canopy. Because the dataset's resolution claim is block-face level, not
+survey level, precise pole coordinates were never part of what it promises.
 
-- `_x_` denotes a street crossing — e.g. `grove_x_newark` is the intersection of
-  Grove Street and Newark Avenue.
-- `_terminus_<direction>_of_<cross_street>` denotes a dead-end or street
+Pole information is therefore **rolled up onto the segment**: counts of physical
+structures (poles, transformers, streetlights) and properties of the conductors
+(primary phase count and side, secondary presence, joint use) are recorded per
+street segment rather than per pole. This matches what is actually observable,
+removes the slowest and least reliable part of collection, and keeps every
+classification field. What is lost is per-pole identity (e.g. *which* of a
+block's poles carries the transformer) — deliberately, since that was not
+recoverable anyway.
+
+## Identifier conventions
+
+**Intersections** (`intersection_id`):
+- `<street1>_x_<street2>` for a crossing — e.g. `grove_x_newark`.
+- `<street>_terminus_<direction>_of_<cross_street>` for a dead-end or street
   discontinuity — e.g. `sussex_terminus_east_of_warren`.
-- A simpler `_terminus_<direction>` is acceptable where context is unambiguous,
-  e.g. waterfront termini.
+- Simpler `<street>_terminus_<direction>` where context is unambiguous, e.g.
+  waterfront termini.
+
+**Segments** (`segment_id`): `<traveled_street>__<from_cross>_to_<to_cross>`,
+lowercase, where the two cross-streets are the bounding intersections' streets
+and their order follows the segment's drawn direction (from→to). The ID encodes
+the geometry: `grove__newark_to_1st` is Grove Street from Newark to 1st, drawn
+in that direction. Termini reuse the intersection convention, e.g.
+`grove__1st_to_terminus_north`.
 
 ## Line segments (`segments`)
 
-Block-face centerlines, each classified overhead or underground.
+One row per street segment — a single centerline between two intersections,
+representing the whole street (both sides) for that block. Pole and conductor
+information is rolled up onto this row.
 
 | Field | Type | Values / format | Description |
 |---|---|---|---|
-| `segment_id` | string | e.g. `grove_x_newark__to__grove_x_bay` | Unique segment identifier (see *Segment identifiers* above). |
-| `overhead_underground` | categorical | `overhead` \| `underground` \| `unknown` | Classification of the block face, keyed on the overhead primary/distribution conductor (see *Decision rule* in METHODOLOGY.md). `unknown` where imagery is insufficient. |
-| `pole_present` | boolean | `true` \| `false` | Whether one or more utility poles are present along the segment. |
-| `transformer_present` | boolean | `true` \| `false` | Whether a pole-mounted or pad-mounted transformer is visible. |
-| `tree_clearance_status` | categorical | `low` \| `medium` \| `high` | Degree of conflict between overhead conductors and tree canopy. `low` = little to no canopy contact or pressure; `high` = significant canopy intrusion or heavy trimming evident. Recorded only where overhead infrastructure is present. |
-| `segment_length` | number | meters | Approximate length of the block-face centerline. |
-| `imagery_date` | string | `YYYY-MM` | Capture date of the Google Street View imagery used to classify the segment, as displayed in Street View. Records evidence vintage for auditability. |
-| `notes` | string | free text | Ambiguities, hybrid configurations, or anything the categorical fields cannot capture. |
-
-## Pole points (`poles`)
-
-Individual utility poles with associated equipment fields.
-
-| Field | Type | Values / format | Description |
-|---|---|---|---|
-| `pole_id` | string | — | Unique pole identifier. |
-| `segment_id` | string | — | Segment the pole is associated with. |
-| `transformer` | boolean | `true` \| `false` | Pole-mounted transformer present. |
-| `imagery_date` | string | `YYYY-MM` | Capture date of imagery used. |
-| `notes` | string | free text | Other equipment or observations. |
-
-> **Note:** the pole feature type has roughly eight equipment fields in total.
-> The remaining ones (e.g. riser, streetlight, multiple attachments) are
-> currently documented inline in the source CSV header and will be formalized in
-> this table as the schema stabilizes.
+| `segment_id` | string | e.g. `grove__newark_to_1st` | Unique segment identifier; encodes traveled street, bounding crosses, and draw direction (see *Identifier conventions*). |
+| `from_intersection` | string | `intersection_id` | Start intersection (the "from" end that sets draw direction). |
+| `to_intersection` | string | `intersection_id` | End intersection (the "to" end). |
+| `overhead_underground` | categorical | `overhead` \| `underground` \| `mixed` \| `unknown` | Segment classification, keyed on the overhead primary/distribution conductor (see *Decision rule* in METHODOLOGY.md). `mixed` = genuinely split along the segment (explain in `notes`); `unknown` = imagery insufficient. |
+| `primary_side` | categorical | `north` \| `south` \| `east` \| `west` \| `both` \| `none` | Which side of the street the overhead primary runs along, by the street's dominant compass bearing. `both` where primary runs both sides; `none` for underground segments or segments with no primary. Genuinely diagonal streets: name the side in `notes`. |
+| `primary_conductors` | integer | `0`–`3` | Phase count of the primary line along the segment (a line property, not a per-pole sum). `1` = single-phase, `3` = three-phase, `0` = no primary. |
+| `pole_count` | integer | ≥ 0 | Count of all physical poles on the segment, including comms-only poles. A count of structures. |
+| `transformer_count` | integer | ≥ 0 | Count of transformers observed on the segment. |
+| `secondary_present` | boolean | `true` \| `false` | Whether electrical secondary (low-voltage, below the clearance gap) is present anywhere on the segment. |
+| `joint_use` | boolean | `true` \| `false` | Whether telecom (below the clearance gap) is present anywhere on the segment. |
+| `streetlight_count` | integer | ≥ 0 | Count of streetlight fixtures on or near poles along the segment. |
+| `imagery_date` | string | `YYYY-MM` | Capture date of the Street View imagery used, as displayed in Street View. Records evidence vintage. |
+| `notes` | string | free text | Ambiguities the fields cannot capture: mid-block side switches, service/crossing poles, comms-only poles, diagonal-street side naming, hybrid configurations. |
 
 ## Underground feature points (`underground_features`)
 
-Visible surface evidence of underground infrastructure.
+Discrete, locatable surface evidence of underground infrastructure. Unlike
+poles, these are individually findable in satellite view (pad-mounted
+transformers, vault lids, etc.), so they remain point features.
 
 | Field | Type | Values / format | Description |
 |---|---|---|---|
 | `feature_id` | string | — | Unique identifier. |
-| `segment_id` | string | — | Associated segment. |
-| `feature_type` | categorical | e.g. `pad_transformer` \| `vault_lid` \| `riser` | Type of visible surface evidence of underground infrastructure. |
+| `segment_id` | string | `segment_id` | Segment the feature is associated with. |
+| `subtype` | categorical | `pad_transformer` \| `manhole` \| `handhole` \| `switchgear` \| `marker` | Type of visible surface evidence. If unsure, pick the closest and describe in `notes` — do not add new subtypes. |
 | `imagery_date` | string | `YYYY-MM` | Capture date of imagery used. |
 | `notes` | string | free text | — |
 
 ## Intersections (`intersections`)
 
-Reference points used during collection to anchor segment endpoints.
+Reference points that anchor segment endpoints. Primarily a collection aid.
 
 | Field | Type | Values / format | Description |
 |---|---|---|---|
-| `intersection_id` | string | e.g. `grove_x_newark` | Unique identifier (see *Segment identifiers*). |
+| `intersection_id` | string | e.g. `grove_x_newark` | Unique identifier (see *Identifier conventions*). |
 | `notes` | string | free text | — |
-
-> The intersections file is primarily a collection aid; its fields will be
-> formalized here against the actual CSV header.
