@@ -58,7 +58,7 @@ coarser, cover a different region, or describe a different layer of the grid:
   (Street View) and target (overhead/underground classification) but covers a
   different region and utility — PSE&G's New Jersey territory — by direct human
   observation rather than model inference, in an area where no utility-owned
-  benchmark map is publicly available. See [`references.md`](references.md) for
+  benchmark map is publicly available. See [`references.md`](docs/REFERENCES.md) for
   detail.
 - **Transmission, not distribution.** Datasets derived from HIFLD (the Homeland
   Infrastructure Foundation-Level Data electric transmission layer) map
@@ -72,7 +72,7 @@ coarser, cover a different region, or describe a different layer of the grid:
   Phase I corridor (June 2026) returned no distribution lines, poles, or
   overhead/underground classification, confirming the gap for the area covered
   so far; the check is corridor-specific and is re-run as coverage expands. The
-  query and its date are documented in [`METHODOLOGY.md`](METHODOLOGY.md).
+  query and its date are documented in [`METHODOLOGY.md`](docs/METHODOLOGY.md).
 
 In short: the existing data is either a modeled estimate at ZIP resolution
 (GUDS), a machine-learning classification of a different region (Wang et al.,
@@ -95,7 +95,7 @@ transformers, and service heads.
 Pole information is recorded per segment rather than as individual pole points:
 poles cannot be reliably located from available imagery, and the dataset's
 resolution is block-face level by design. The reasoning is documented in
-[`DATA_DICTIONARY.md`](DATA_DICTIONARY.md).
+[`DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md).
 
 Classification is performed by direct observation of Google Street View
 imagery, with each block-face inspected and coded by hand. The initial
@@ -104,8 +104,8 @@ extending coverage westward.
 
 The full classification method — what is observed versus inferred, the
 decision rule, known sources of error, and the validation procedure — is
-documented in [`METHODOLOGY.md`](METHODOLOGY.md), and field definitions are in
-[`DATA_DICTIONARY.md`](DATA_DICTIONARY.md).
+documented in [`METHODOLOGY.md`](docs/METHODOLOGY.md), and field definitions are in
+[`DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md).
 
 ## Background research
 
@@ -190,7 +190,7 @@ required (see License below). I'd also be interested to hear how you used it.
   coded by one person. Inter-rater reliability has not been measured.
 - **Imagery-based inference, not direct mapping.** Underground segments are
   inferred from the absence of visible overhead infrastructure, not observed
-  directly. See [`METHODOLOGY.md`](METHODOLOGY.md) for the known error modes
+  directly. See [`METHODOLOGY.md`](docs/METHODOLOGY.md) for the known error modes
   (rear-lot feeds, hybrid blocks, stale imagery).
 - **Snapshot in time.** Google Street View imagery for the Phase I area varies
   in capture date. Infrastructure changes — new construction, undergrounding
